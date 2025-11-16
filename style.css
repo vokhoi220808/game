@@ -1,27 +1,48 @@
 *{box-sizing:border-box}
 html,body{
-  height:100%;
   margin:0;
+  padding:0;
+  height:100%;
   background:#0b0f14;
+  font-family:monospace;
+  color:#cfe;
+  overflow:hidden;        /* QUAN TRỌNG: bỏ hết khoảng thừa */
+}
+
+/* --- KHUNG GAME FULL MÀN, CHUẨN TỈ LỆ 420x640 --- */
+#wrap{
+  position:relative;
+  width:100vw;
+  height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-family:monospace;
-  color:#cfe;
+  overflow:hidden;
 }
-#wrap{width:420px}
+
+/* --- Canvas auto fit vào wrap nhưng giữ tỉ lệ --- */
 canvas{
-  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;     /* CHÍNH LÀ THẰNG FIX KHOẢNG DƯ */
   background:linear-gradient(#111,#062);
   border:6px solid #123;
-  border-radius:6px
+  border-radius:6px;
 }
+
+/* --- UI đè lên trên, luôn theo canvas --- */
 #ui{
+  position:absolute;
+  top:10px;
+  left:0;
+  width:100%;
+  padding:0 12px;
   display:flex;
   justify-content:space-between;
-  margin-top:8px;
-  gap:8px
+  z-index:20;
 }
+
+/* panel + nitro giữ nguyên */
 .panel{
   background:rgba(0,0,0,0.4);
   padding:6px 8px;
@@ -35,17 +56,20 @@ canvas{
   border-radius:6px;
   overflow:hidden
 }
-.meter > i{
-  display:block;
+.meter>i{
+  width:0%;
   height:100%;
-  background:linear-gradient(#ffd,#f60);
-  width:0%
+  display:block;
+  background:linear-gradient(#ffd,#f60)
 }
+
 .btnhint{
   font-size:12px;
   color:#9ae;
-  margin-left:6px
+  margin-left:6px;
 }
+
+/* popup giữ nguyên */
 #popup{
   position:absolute;
   top:0; left:0; width:100%; height:100%;
@@ -53,7 +77,7 @@ canvas{
   display:flex;
   justify-content:center;
   align-items:center;
-  z-index:10;
+  z-index:30;
 }
 #popupContent{
   background:#223;
@@ -61,7 +85,6 @@ canvas{
   border-radius:8px;
   color:#fff;
   text-align:center;
-  font-family:monospace;
 }
 #popupContent input{
   padding:6px;
